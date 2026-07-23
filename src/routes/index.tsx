@@ -9,19 +9,31 @@ export const Route = createFileRoute("/")({
 const px = (id: string | number, w = 1600) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
+const px = (id: string | number, ext: "jpeg" | "png" = "jpeg", w = 1600) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.${ext}?auto=compress&cs=tinysrgb&w=${w}`;
+
 const IMG = {
-  livingFire: px(36353380),
-  livingLight: px(36353382),
-  livingMinimal: px(36353383),
-  kitchen1: px(33314763),
-  kitchen2: px(33314762),
-  kitchenStair: px(33314767),
-  kitchenRestaurant: px(33314766),
-  bedroom1: px(32177991),
-  bedroom2: px(32177992),
+  // Living Spaces — The Ghazi (png)
+  livingFire: px(36353380, "png"),
+  livingLight: px(36353382, "png"),
+  livingMinimal: px(36353383, "png"),
+
+  // Kitchens — The Ghazi (png)
+  kitchen1: px(33314763, "png"),
+  kitchen2: px(33314762, "png"),
+  kitchenStair: px(33314767, "png"),
+  kitchenRestaurant: px(33314766, "png"),
+
+  // Bedrooms — The Ghazi (png)
+  bedroom1: px(32177991, "png"),
+  bedroom2: px(32177992, "png"),
+
+  // Bathrooms — regular photography (jpeg)
   bathMarble: px(31525748),
   bathGlass: px(36177447),
   bathHotel: px(26886816),
+
+  // Furniture — regular photography (jpeg)
   sofaWall: px(8987432),
   livingSofa: px(8987431),
   louisXIV: px(14531186),
@@ -32,11 +44,15 @@ const IMG = {
   velvet: px(8135267),
   goldChair: px(31766271),
   brownSofa2: px(8135268),
+
+  // Dining — regular photography (jpeg)
   loungeMin: px(36962662),
   diningTable: px(8120948),
   cafeCorner: px(15352196),
   restaurantWarm: px(37737840),
   restaurantWood: px(27969787),
+
+  // Decor — regular photography (jpeg)
   framesWall: px(7019021),
   handmadeDecor: px(20130620),
   photosWall: px(8488980),
@@ -48,7 +64,6 @@ const IMG = {
   pottery: px(10252300),
   potPlant: px(20079538),
 };
-
 const BRAND = "ORVELLE";
 
 function Monogram({ className = "" }: { className?: string }) {
