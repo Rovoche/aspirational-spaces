@@ -13,19 +13,34 @@ export function Reveal({ children, as: As = "div", className = "", delay = 0, mo
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Safety net: if the IntersectionObserver never fires (hydration
+    // timing, unsupported browser, an unrelated JS error aborting effects,
+    // etc.) content must not stay permanently clipped/invisible forever.
+    const fallback = setTimeout(() => setInView(true), 1200);
+
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return () => clearTimeout(fallback);
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             setTimeout(() => setInView(true), delay);
             io.disconnect();
+            clearTimeout(fallback);
           }
         });
       },
       { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      clearTimeout(fallback);
+    };
   }, [delay]);
 
   const base = mode === "image" ? "reveal" : "fade-up";
