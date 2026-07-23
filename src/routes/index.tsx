@@ -6,9 +6,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const px = (id: string | number, w = 1600) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
-
 const px = (id: string | number, ext: "jpeg" | "png" = "jpeg", w = 1600) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.${ext}?auto=compress&cs=tinysrgb&w=${w}`;
 
@@ -64,6 +61,7 @@ const IMG = {
   pottery: px(10252300),
   potPlant: px(20079538),
 };
+
 const BRAND = "ORVELLE";
 
 function Monogram({ className = "" }: { className?: string }) {
